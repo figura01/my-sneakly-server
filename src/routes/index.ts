@@ -21,6 +21,13 @@ export function init(app: express.Application): void {
     app.use(express.static(path.join(__dirname, "public")));
     const router: express.Router = express.Router();
 
+    if (process.env.NODE_ENV === "production") {
+        app.use("*", (req, res, next) => {
+          // If no routes match, send them the React HTML.
+          res.sendFile(__dirname + "/public/index.html");
+        });
+    }
+
     /**
      * @description
      *  Forwards any requests to the /v1/users URI to our UserRouter

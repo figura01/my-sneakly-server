@@ -14,7 +14,7 @@ interface IConfig {
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
 
 const development: IConfig = {
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 8000,
     database: {
         MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/',
         MONGODB_DB_MAIN: process.env.MONGODB_DB_MAIN || 'sneakers_db',
