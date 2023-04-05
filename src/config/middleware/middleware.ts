@@ -16,7 +16,7 @@ console.log(process.env.FRONTEND_LOCAL_URL)
 export function configure(app: express.Application): void {
     // express middleware
     //const allowedOrigins = ['*','http://localhost:3000'];
-        // providing a Connect/Express middleware that can be used to enable CORS with various options
+    // providing a Connect/Express middleware that can be used to enable CORS with various options
     app.use(express.json());
     app.use(cors());
     app.use(bodyParser.urlencoded({
@@ -37,7 +37,6 @@ export function configure(app: express.Application): void {
     // cors
     app.use((req, res, next) => {
         res.header("Access-Control-Allow-Origin", '*');
-        res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS ');
         res.header(
             'Access-Control-Allow-Headers',
