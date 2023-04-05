@@ -12,7 +12,7 @@ interface IConfig {
 }
 
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
-
+console.log('process.env.PORT: ', process.env.PORT)
 const development: IConfig = {
     port: process.env.PORT || 8000,
     database: {

@@ -11,7 +11,6 @@ const express = require("express");
 const helmet = require("helmet");
 const index_1 = require("../error/index");
 const sendHttpError_1 = require("../error/sendHttpError");
-console.log(process.env.FRONTEND_LOCAL_URL);
 /**
  * @export
  * @param {express.Application} app

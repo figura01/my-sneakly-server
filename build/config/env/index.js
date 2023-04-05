@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = require("dotenv");
 dotenv.config();
 const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log('process.env.PORT: ', process.env.PORT);
 const development = {
     port: process.env.PORT || 8000,
     database: {
