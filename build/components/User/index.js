@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.remove = exports.create = exports.findOne = exports.findAll = void 0;
+exports.remove = exports.updateOne = exports.create = exports.findOne = exports.findAll = void 0;
 const service_1 = require("./service");
 const error_1 = require("../../config/error");
 /**
@@ -60,8 +60,6 @@ exports.findOne = findOne;
 function create(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log(req);
-            console.log(req.body);
             const user = yield service_1.default.insert(req.body);
             res.status(201).json(user);
         }
@@ -71,6 +69,28 @@ function create(req, res, next) {
     });
 }
 exports.create = create;
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
+function updateOne(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { id } = req.params;
+        try {
+            const user = yield service_1.default.updateOne(req.body, id);
+            if (user) {
+                res.status(201).json(user);
+            }
+        }
+        catch (error) {
+            next(new error_1.HttpError(error.message.status, error.message));
+        }
+    });
+}
+exports.updateOne = updateOne;
 // /**
 //  * @export
 //  * @param {Request} req

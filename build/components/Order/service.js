@@ -23,7 +23,6 @@ const OrderService = {
      */
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('find all orders');
             try {
                 return yield model_1.default.find({});
             }

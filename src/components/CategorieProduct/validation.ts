@@ -48,6 +48,21 @@ class CategorieProductValidation extends Validation {
         return schema.validate(body);
     }
 
+     /**
+     * @param {ICategorieProductModel} params
+     * @returns {Joi.ValidationResult}
+     * @memberof CategorieProductValidation
+     */
+    updateCategorieProduct(
+        params: ICategorieProductModel
+    ): Joi.ValidationResult {
+        console.log(params)
+        const schema: Joi.Schema = Joi.object().keys({
+            label: Joi.string().required(),
+        });
+        return schema.validate(params)
+    }
+
     /**
      * @param {{ id: string }} body
      * @returns {Joi.ValidationResult<{ id: string }>}

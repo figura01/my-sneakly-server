@@ -23,6 +23,7 @@ class Validation {
             base: joi.string(),
             validate(value, helpers) {
                 if (!mongoose_1.Types.ObjectId.isValid(value)) {
+                    console.log('value in validation: ', value);
                     return this.createError('objectId.base', {
                         value,
                     }, helpers);

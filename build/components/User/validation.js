@@ -54,6 +54,22 @@ class UserValidation extends validation_1.default {
         });
         return schema.validate(body);
     }
+    /**
+    * @param {IUserModel} params
+    * @returns {Joi.ValidationResult}
+    * @memberof UserValidation
+    */
+    updateUser(params) {
+        const schema = Joi.object().keys({
+            email: Joi.string().email({
+                minDomainSegments: 2,
+            }).required(),
+            firstname: Joi.string(),
+            lastname: Joi.string(),
+            role: Joi.string(),
+        });
+        return schema.validate(params);
+    }
 }
 exports.default = new UserValidation();
 //# sourceMappingURL=validation.js.map

@@ -27,6 +27,12 @@ export interface ICategorieProductService {
     insert(categorieProductModel: ICategorieProductModel): Promise<ICategorieProductModel>;
 
     /**
+     * @param {ICategorieProductModel} categorieProductModel
+     * @returns {Promise<ICategorieProductModel>}
+     * @memberof ICategorieProductService
+     */
+    updateOne(categorieProductModel: ICategorieProductModel, id: string): Promise<ICategorieProductModel>;
+    /**
      * @param {string} id
      * @returns {Promise<ICategorieProductModel>}
      * @memberof ICategorieProductService

@@ -14,7 +14,6 @@ const OrderService: IOrderService = {
      * @memberof OrderService
      */
     async findAll(): Promise < IOrderModel[] > {
-        console.log('find all orders');
         try {
             return await OrderModel.find({});
         } catch (error) {

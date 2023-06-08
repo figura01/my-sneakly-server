@@ -25,7 +25,6 @@ function signup(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const user = yield service_1.default.createUser(req.body);
-            console.log('user after create', user);
             const token = jwt.sign({ email: user.email }, server_1.default.get('secret'), {
                 expiresIn: '60m',
             });
@@ -67,10 +66,7 @@ function login(req, res, next) {
             const token = jwt.sign({ email: user.email }, server_1.default.get('secret'), {
                 expiresIn: '60m',
             });
-            console.log('token: ', token);
-            console.log('user', user);
             delete user["password"];
-            console.log(user);
             const { _id, firstname, lastname, email, role } = user;
             res.json({
                 status: 200,

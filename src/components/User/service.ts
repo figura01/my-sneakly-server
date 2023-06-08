@@ -14,7 +14,6 @@ const UserService: IUserService = {
      * @memberof UserService
      */
     async findAll(): Promise < IUserModel[] > {
-        console.log('find all users');
         try {
             return await UserModel.find({});
         } catch (error) {
@@ -51,19 +50,41 @@ const UserService: IUserService = {
      * @memberof UserService
      */
     async insert(body: IUserModel): Promise < IUserModel > {
-        console.log('create users in service')
         try {
             const validate: Joi.ValidationResult = UserValidation.createUser(body);
 
             if (validate.error) {
                 throw new Error(validate.error.message);
             }
-            
-            console.log('body: ', body)
+
             const user: IUserModel = await UserModel.create(body);
 
             return user;
         } catch (error) {
+            throw new Error(error.message);
+        }
+    },
+
+    /**
+     * @param { IUserModel } user
+     * @returns {Promise < IUserModel >}
+     * @memberof UserService
+     */
+
+    async updateOne(body: IUserModel, id: string): Promise < IUserModel > {
+        try {
+            const validate: Joi.ValidationResult = UserValidation.updateUser(body);
+            if (validate.error) {
+                throw new Error(validate.error.message);
+            }
+
+            const updatedUser: IUserModel = await UserModel.findByIdAndUpdate(id, body, {new: true});
+            if(updatedUser) {
+                return updatedUser;
+            }
+            
+        }
+        catch (error) {
             throw new Error(error.message);
         }
     },
@@ -92,29 +113,6 @@ const UserService: IUserService = {
             throw new Error(error.message);
         }
     },
-
-    // /**
-    // * @param {string} id
-    // * @returns {Promise < IUserModel >}
-    // * @memberof UserService
-    // */
-    // async updateOne(id: string, data:any): Promise < IUserModel > {
-    //     try {
-    //         const validate: Joi.ValidationResult = UserValidation.updateUser({
-    //             id,
-    //         });
-
-    //         if (validate.error) {
-    //             throw new Error(validate.error.message);
-    //         }
-
-    //         return await UserModel.findByIdAndUpdate({
-    //             _id: new Types.ObjectId(id),
-    //         });
-    //     } catch (error) {
-    //         throw new Error(error.message);
-    //     }
-    // },
 };
 
 export default UserService;

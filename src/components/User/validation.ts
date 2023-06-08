@@ -76,26 +76,20 @@ class UserValidation extends Validation {
      * @returns {Joi.ValidationResult}
      * @memberof UserValidation
      */
-    // updateUser(
-    //     params: IUserModel,
-    //     body: {
-    //         id: string
-    //     },
-    // ):  Joi.ValidationResult {
-    //     const schema: Joi.Schema = Joi.object().keys({
-    //         password: Joi.string().required(),
-    //         email: Joi.string().email({
-    //             minDomainSegments: 2,
-    //         }).required(),
-    //         firstname: Joi.string(),
-    //         lastname: Joi.string(),
-    //         role: Joi.string(),
-    //     });
+    updateUser(
+        params: IUserModel
+    ):  Joi.ValidationResult {
+        const schema: Joi.Schema = Joi.object().keys({
+            email: Joi.string().email({
+                minDomainSegments: 2,
+            }).required(),
+            firstname: Joi.string(),
+            lastname: Joi.string(),
+            role: Joi.string(),
+        });
 
-    //     return schema.validate(params);
-
-    //     return schema.validate(body);
-    // }
+        return schema.validate(params);
+    }
 }
 
 export default new UserValidation();

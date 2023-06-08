@@ -66,6 +66,30 @@ const CategorieProductService: ICategorieProductService = {
     },
 
     /**
+     * @param { ICategorieProductModel } categorieProduct
+     * @returns {Promise < ICategorieProductModel >}
+     * @memberof CategorieProductService
+     */
+
+    async updateOne(body: ICategorieProductModel, id: string): Promise < ICategorieProductModel > {
+        console.log('update a categorie product: ')
+        try {
+            const validate: Joi.ValidationResult = CategorieProductValidation.updateCategorieProduct(body);
+            if (validate.error) {
+                throw new Error(validate.error.message);
+            }
+
+            const updatedUser: ICategorieProductModel = await CategorieProductModel.findByIdAndUpdate(id, body, {new: true});
+            if(updatedUser) {
+                return updatedUser;
+            }
+            
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
+    }, 
+    /**
      * @param {string} id
      * @returns {Promise < ICategorieProductModel >}
      * @memberof CategorieProductService

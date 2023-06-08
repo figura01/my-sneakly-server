@@ -26,12 +26,12 @@ export interface IUserService {
      */
     insert(userModel: IUserModel): Promise<IUserModel>;
 
-    // /**
-    //  * @param {IUserModel} userModel
-    //  * @returns {Promise<IUserModel>}
-    //  * @memberof IUserService
-    //  */
-    // updateOne(userModel: IUserModel): Promise<IUserModel>;
+    /**
+     * @param {IUserModel} userModel
+     * @returns {Promise<IUserModel>}
+     * @memberof IUserService
+     */
+    updateOne(userModel: IUserModel, id: string): Promise<IUserModel>;
 
 
     /**

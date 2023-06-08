@@ -16,9 +16,6 @@ const sendHttpError_1 = require("../error/sendHttpError");
  * @param {express.Application} app
  */
 function configure(app) {
-    // express middleware
-    //const allowedOrigins = ['*','http://localhost:3000'];
-    // providing a Connect/Express middleware that can be used to enable CORS with various options
     app.use(express.json());
     app.use(cors());
     app.use(bodyParser.urlencoded({
@@ -36,7 +33,6 @@ function configure(app) {
     // cors
     app.use((req, res, next) => {
         res.header("Access-Control-Allow-Origin", '*');
-        res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS ');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With,'
             + ' Content-Type, Accept,'

@@ -15,7 +15,6 @@ import { IUserModel } from '../User/model';
 export async function signup(req: Request, res: Response, next: NextFunction): Promise < void > {
     try {
         const user: IUserModel = await AuthService.createUser(req.body);
-        console.log('user after create', user)
         const token: string = jwt.sign({ email: user.email }, app.get('secret'), {
             expiresIn: '60m',
         });
@@ -56,10 +55,9 @@ export async function login(req: Request, res: Response, next: NextFunction): Pr
         const token: string = jwt.sign({ email: user.email }, app.get('secret'), {
             expiresIn: '60m',
         });
-        console.log('token: ', token);
-        console.log('user', user);
+
         delete user["password"];
-        console.log(user)
+
         const {_id, firstname, lastname, email, role} = user;
         res.json({
             status: 200,

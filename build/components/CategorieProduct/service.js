@@ -75,6 +75,29 @@ const CategorieProductService = {
         });
     },
     /**
+     * @param { ICategorieProductModel } categorieProduct
+     * @returns {Promise < ICategorieProductModel >}
+     * @memberof CategorieProductService
+     */
+    updateOne(body, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('update a categorie product: ');
+            try {
+                const validate = validation_1.default.updateCategorieProduct(body);
+                if (validate.error) {
+                    throw new Error(validate.error.message);
+                }
+                const updatedUser = yield model_1.default.findByIdAndUpdate(id, body, { new: true });
+                if (updatedUser) {
+                    return updatedUser;
+                }
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        });
+    },
+    /**
      * @param {string} id
      * @returns {Promise < ICategorieProductModel >}
      * @memberof CategorieProductService

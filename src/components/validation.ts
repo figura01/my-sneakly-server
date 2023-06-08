@@ -29,6 +29,7 @@ abstract class Validation {
                 helpers: Joi.CustomHelpers,
             ): Object | string {
                 if (!Types.ObjectId.isValid(value)) {
+                    console.log('value in validation: ', value)
                     return this.createError(
                         'objectId.base',
                         {

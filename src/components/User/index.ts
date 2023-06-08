@@ -46,11 +46,29 @@ export async function findOne(req: Request, res: Response, next: NextFunction): 
  */
 export async function create(req: Request, res: Response, next: NextFunction): Promise < void > {
     try {
-        console.log(req);
-        console.log(req.body);
         const user: IUserModel = await UserService.insert(req.body);
 
         res.status(201).json(user);
+    } catch (error) {
+        next(new HttpError(error.message.status, error.message));
+    }
+}
+
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
+export async function updateOne(req: Request, res: Response, next: NextFunction): Promise < void > {
+    const { id } = req.params;
+    try {
+        const user: IUserModel = await UserService.updateOne(req.body, id);
+        if(user) {
+            res.status(201).json(user);
+        }
+        
     } catch (error) {
         next(new HttpError(error.message.status, error.message));
     }

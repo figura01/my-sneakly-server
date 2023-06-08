@@ -23,7 +23,6 @@ const UserService = {
      */
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('find all users');
             try {
                 return yield model_1.default.find({});
             }
@@ -62,15 +61,35 @@ const UserService = {
      */
     insert(body) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('create users in service');
             try {
                 const validate = validation_1.default.createUser(body);
                 if (validate.error) {
                     throw new Error(validate.error.message);
                 }
-                console.log('body: ', body);
                 const user = yield model_1.default.create(body);
                 return user;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        });
+    },
+    /**
+     * @param { IUserModel } user
+     * @returns {Promise < IUserModel >}
+     * @memberof UserService
+     */
+    updateOne(body, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const validate = validation_1.default.updateUser(body);
+                if (validate.error) {
+                    throw new Error(validate.error.message);
+                }
+                const updatedUser = yield model_1.default.findByIdAndUpdate(id, body, { new: true });
+                if (updatedUser) {
+                    return updatedUser;
+                }
             }
             catch (error) {
                 throw new Error(error.message);
@@ -101,26 +120,6 @@ const UserService = {
             }
         });
     },
-    // /**
-    // * @param {string} id
-    // * @returns {Promise < IUserModel >}
-    // * @memberof UserService
-    // */
-    // async updateOne(id: string, data:any): Promise < IUserModel > {
-    //     try {
-    //         const validate: Joi.ValidationResult = UserValidation.updateUser({
-    //             id,
-    //         });
-    //         if (validate.error) {
-    //             throw new Error(validate.error.message);
-    //         }
-    //         return await UserModel.findByIdAndUpdate({
-    //             _id: new Types.ObjectId(id),
-    //         });
-    //     } catch (error) {
-    //         throw new Error(error.message);
-    //     }
-    // },
 };
 exports.default = UserService;
 //# sourceMappingURL=service.js.map

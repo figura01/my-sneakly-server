@@ -23,7 +23,6 @@ const RowProductService = {
      */
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('find all rowproducts');
             try {
                 return yield model_1.default.find({});
             }

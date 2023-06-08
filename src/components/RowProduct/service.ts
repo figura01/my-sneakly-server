@@ -14,7 +14,6 @@ const RowProductService: IRowProductService = {
      * @memberof RowProductService
      */
     async findAll(): Promise < IRowProductModel[] > {
-        console.log('find all rowproducts');
         try {
             return await RowProductModel.find({});
         } catch (error) {

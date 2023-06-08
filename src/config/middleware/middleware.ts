@@ -8,15 +8,11 @@ import * as express from 'express';
 import * as helmet from 'helmet';
 import { HttpError } from '../error/index';
 import { sendHttpErrorModule } from '../error/sendHttpError';
-console.log(process.env.FRONTEND_LOCAL_URL)
 /**
  * @export
  * @param {express.Application} app
  */
 export function configure(app: express.Application): void {
-    // express middleware
-    //const allowedOrigins = ['*','http://localhost:3000'];
-    // providing a Connect/Express middleware that can be used to enable CORS with various options
     app.use(express.json());
     app.use(cors());
     app.use(bodyParser.urlencoded({
